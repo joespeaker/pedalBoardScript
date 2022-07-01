@@ -27,6 +27,7 @@ with AudioFile("song.mp3", 'r') as f:
 
 # Make a Pedalboard object, containing multiple plugins:
 board = Pedalboard([
+  #values should be 0.8 and 0.1
     Reverb(room_size=0.8, wet_level=0.1)
     ])
 print("Successfully added reverb.")
@@ -39,6 +40,7 @@ with AudioFile('processed-output.wav', 'w', samplerate, effected.shape[0]) as f:
   f.write(effected)
 print("Successfully created new file.")
 
+#value should be 1.2
 slow.stretch('processed-output.wav', 1.2)
 print("Stretched song.")
 
