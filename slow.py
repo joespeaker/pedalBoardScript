@@ -1,6 +1,7 @@
 import wave
 
 def stretch( fname,  factor ):
+ ''' Stretches the audio in fname by the factor'''
  infile=wave.open( fname, 'rb')
  rate= infile.getframerate()
  channels=infile.getnchannels()
