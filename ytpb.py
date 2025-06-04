@@ -1,4 +1,3 @@
-from turtle import speed
 from pytube import YouTube
 import os
 from pedalboard import Pedalboard, Reverb
@@ -6,7 +5,7 @@ from pedalboard.io import AudioFile
 import slow
 import shutil
 
-def download(youtube_link):
+def download(youtube_link, output_dir="."):
   #youtube url
   yt = YouTube(youtube_link)
   video = yt.streams.filter(only_audio=True).first()
@@ -51,12 +50,13 @@ def download(youtube_link):
   os.remove('processed-output.wav')
   print("Unprocessed files deleted.")
 
-  #move file to folder on desktop
-  curr_dir = os.getcwd()
-  copy_path = "/Users/joebieker/Desktop"
-  file_path = curr_dir + f"/stretched.wav"
-  shutil.move(file_path, copy_path)
-  print("File moved to desktop.")
+  #move file to chosen directory
+  dest_dir = os.path.abspath(output_dir)
+  os.makedirs(dest_dir, exist_ok=True)
+  temp_path = os.path.join(dest_dir, "stretched.wav")
+  shutil.move("stretched.wav", temp_path)
+  print("File moved to directory.")
 
   #rename file
-  os.rename("/Users/joebieker/Desktop/stretched.wav", f"/Users/joebieker/Desktop/{yt.title}.wav")
+  final_path = os.path.join(dest_dir, f"{yt.title}.wav")
+  os.rename(temp_path, final_path)
