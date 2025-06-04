@@ -7,8 +7,9 @@ import ytpb
 
 def on_submit_click():
     youtube_link = input_field.text()
+    output_dir = file_path_input.text()
     result_label.setText("Downloading...")
-    ytpb.download(youtube_link)
+    ytpb.download(youtube_link, output_dir)
     result_label.setText("Done!")
 
 def open_file_explorer():
